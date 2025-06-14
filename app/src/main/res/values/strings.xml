@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Appli</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="intro">Application de gestion d\'appartements</string>
+    <string name="button_hf">Click me</string>
+    <string name="menu_button">...</string>
+    <string name="edit_button_text">Éditer</string>
+    <string name="delete_button_text">Supprimer</string>
+</resources>

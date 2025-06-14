@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/home"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HomeFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:gravity="center|center_horizontal"
+        android:text="@string/intro" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="318dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="180dp"
+        android:background="#232121"
+        android:backgroundTint="#CE20A6"
+        android:onClick="handleButtonClick"
+        android:rotation="0"
+        android:rotationX="0"
+        android:rotationY="0"
+        android:text="@string/button_hf" />
+
+    <EditText
+        android:id="@+id/editTextNumber"
+        android:layout_width="314dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="85dp"
+        android:autofillHints="123"
+        android:ems="100"
+        android:inputType="number"
+        tools:ignore="LabelFor" />
+
+</FrameLayout>
