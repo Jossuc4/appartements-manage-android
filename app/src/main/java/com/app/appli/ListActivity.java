@@ -42,11 +42,18 @@ public class ListActivity extends AppCompatActivity {
         int [] loyers = new int[]{700,1000,1200,1800,950,2000,2400,1900,1700};
         int i = 0;
 
+        int max , min , total;
+        total = 0;
+        min = loyers[0];
+        max = min;
+
         for (String appartement : appartements) {
 
+            String loyer = Integer.toString(loyers[i]);
             HashMap<String, String> items = new HashMap<String, String>();
             items.put("designation", appartement);
-            items.put("loyer",Integer.toString(loyers[i]));
+            items.put("loyer",loyer);
+            items.put("numApp",appartement.toUpperCase().charAt(0)+loyer.substring(0,4));
 
             if(loyers[i]<1000){
                 items.put("observation","Bas");
@@ -57,6 +64,16 @@ public class ListActivity extends AppCompatActivity {
             }
 
             listItems.add(items);
+            if(min > loyers[i]){
+                min = loyers[i];
+            }
+
+            if(max<loyers[i]){
+                max = loyers[i];
+            }
+
+            total += loyers[i];
+
             i++;
 
         }
