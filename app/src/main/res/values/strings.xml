@@ -6,4 +6,5 @@
     <string name="menu_button">...</string>
     <string name="edit_button_text">Éditer</string>
     <string name="delete_button_text">Supprimer</string>
+    <string name="API_URL">http://192.168.10.5:5000</string>
 </resources>

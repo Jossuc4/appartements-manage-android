@@ -56,27 +56,32 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                HttpURLConnection connection = null;
-                try{
-                    URL url = new URL("http://192.168.1.101:8080/personne/all");
-                    connection = (HttpURLConnection) url.openConnection();
-                    connection.setRequestMethod("GET");
-
-                    InputStream in = new BufferedInputStream(connection.getInputStream());
-                    Scanner scan =  new Scanner(in);
-
-                    allApps = new Genson().deserialize(scan.nextLine(), new GenericType<List<Appartement>>(){});
-
-                    Log.i("CONNECTION_RESULTS",scan.toString());
-                    in.close();
-                }catch(Exception e){
-                    e.printStackTrace();
-                }
-            }
-        }).start();
+///        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                HttpURLConnection connection = null;
+//                try {
+//                    // Remplace R.strings.API_URL par ta vraie URL string ici
+//                    URL url = new URL(getString(R.strings.API_URL)+"personne/all");
+//                    connection = (HttpURLConnection) url.openConnection();
+//                    connection.setRequestMethod("GET");
+//
+//                    InputStream in = new BufferedInputStream(connection.getInputStream());
+//                    Scanner scan = new Scanner(in).useDelimiter("\\A"); // lire tout le stream en 1 fois
+//                    String json = scan.hasNext() ? scan.next() : "";
+//
+//                    allApps = new Genson().deserialize(json, new GenericType<List<Appartement>>() {});
+//
+//                    Log.i("CONNECTION_RESULTS", json);
+//
+//                    in.close();
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                } finally {
+//                    if (connection != null) connection.disconnect();
+//                }
+//            }
+///        }).start()
 
         nextActivityButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,28 +102,43 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                HttpURLConnection connection = null;
-                try {
-                    URL url = new URL("http://localhost:8080/personne/all");
-                    connection = (HttpURLConnection) url.openConnection();
-                    connection.setRequestMethod("GET");
-
-                    InputStream in = new BufferedInputStream(connection.getInputStream());
-                    Scanner scan = new Scanner(in);
-
-                    Log.i("CONNECTION_RESULTS", scan.toString());
-                    in.close();
-                } catch (Exception e) {
-                    Log.e("ERROR", Objects.requireNonNull(e.getMessage()));
-                }
-            }
-        }).start();
-
-    }
+//    protected void onResume() {
+//        super.onResume();
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                HttpURLConnection connection = null;
+//                try {
+//                    URL url = new URL(R.strings.API_URL+"/appartements");
+//                    connection = (HttpURLConnection) url.openConnection();
+//                    connection.setRequestMethod("GET");
+//
+//                    InputStream in = new BufferedInputStream(connection.getInputStream());
+//                    Scanner scanner = new Scanner(in).useDelimiter("\\A"); // tout lire
+//                    String json = scanner.hasNext() ? scanner.next() : "";
+//
+//                    // Parser JSON avec Genson
+//                    Genson genson = new Genson();
+//
+//                    // Exemple d'objet Appartement, adapte selon ta classe modèle
+//                    Type collectionType = new TypeToken<List<Appartement>>(){}.getType();
+//                    List<Appartement> appartements = genson.deserialize(json, collectionType);
+//
+//                    // Pour vérifier dans les logs
+//                    for (Appartement a : appartements) {
+//                        Log.i("API_RESULT", "Appartement numApp: " + a.getNumApp() + ", loyer: " + a.getLoyer());
+//                    }
+//
+//
+//
+//                    Log.i("CONNECTION_RESULTS", scan.toString());
+//                    in.close();
+//                } catch (Exception e) {
+//                    Log.e("ERROR", Objects.requireNonNull(e.getMessage()));
+//                }
+//            }
+//        }).start();
+//
+//    }
 
 }

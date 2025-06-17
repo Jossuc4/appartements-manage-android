@@ -47,39 +47,59 @@ public class ListActivity extends AppCompatActivity {
         min = loyers[0];
         max = min;
 
-        for (String appartement : appartements) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    List<Appartement> appartements = APIClass.getAll();
 
-            String loyer = Integer.toString(loyers[i]);
-            HashMap<String, String> items = new HashMap<String, String>();
-            items.put("designation", appartement);
-            items.put("loyer",loyer);
-            items.put("numApp",appartement.toUpperCase().charAt(0)+loyer.substring(0,4));
+                    for (Appartement appartement : appartements) {
 
-            if(loyers[i]<1000){
-                items.put("observation","Bas");
-            }else if(loyers[i]>1000){
-                items.put("observation","Cher");
-            }else{
-                items.put("observation","Normal");
+//                        String loyer = Integer.toString(loyers[i]);
+//                        HashMap<String, String> items = new HashMap<String, String>();
+//                        items.put("designation", appartement);
+//                        items.put("loyer",loyer);
+//                        items.put("numApp",appartement.toUpperCase().charAt(0)+loyer.substring(0,4));
+
+                        HashMap<String, String> items = new HashMap<String, String>();
+                        String loyer = Double.toString(appartement.getLoyer());
+                        Double l = appartement.getLoyer();
+                        items.put("designation",appartement.getDesignation());
+                        items.put("loyer",loyer);
+                        items.get("numApp",appartement.getNumApp().toUpperCase()
+                                .charAt(0)+loyer.substring(0,4));
+
+                        if(l<1000){
+                            items.put("observation","Bas");
+                        }else if(l>1000){
+                            items.put("observation","Cher");
+                        }else{
+                            items.put("observation","Normal");
+                        }
+
+                        listItems.add(items);
+                        if(min > l){
+                            min = l;
+                        }
+
+                        if(max<l){
+                            max = l;
+                        }
+
+                        total += l;
+
+                        i++;
+
+                    }
+
+                    CustomListAdapter adapter = new CustomListAdapter(this, listItems);
+                    liste.setAdapter(adapter);
+                    
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
             }
-
-            listItems.add(items);
-            if(min > loyers[i]){
-                min = loyers[i];
-            }
-
-            if(max<loyers[i]){
-                max = loyers[i];
-            }
-
-            total += loyers[i];
-
-            i++;
-
-        }
-
-        CustomListAdapter adapter = new CustomListAdapter(this, listItems);
-        liste.setAdapter(adapter);
+        }).start();
 
         btn_graph.setOnClickListener(new View.OnClickListener() {
             @Override

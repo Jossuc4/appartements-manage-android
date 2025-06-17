@@ -27,6 +27,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
+import com.app.appli.API.*;
 
 public class CustomListAdapter extends BaseAdapter {
 
@@ -99,15 +100,17 @@ public class CustomListAdapter extends BaseAdapter {
                         public void run() {
                             HttpURLConnection connection = null;
                             try{
-                                URL url = new URL("http://192.168.1.101:8080/appartement/delete/"+numApp);
-                                connection = (HttpURLConnection) url.openConnection();
-                                connection.setRequestMethod("DELETE");
+//                                URL url = new URL("http://"+R.strings.IP_api+":8080/appartement/delete/"+numApp);
+//                                connection = (HttpURLConnection) url.openConnection();
+//                                connection.setRequestMethod("DELETE");
+//
+//                                InputStream in = new BufferedInputStream(connection.getInputStream());
+//                                Scanner scan =  new Scanner(in);
+//
+//                                Log.i("CONNECTION_RESULTS",scan.toString());
+//                                in.close();
 
-                                InputStream in = new BufferedInputStream(connection.getInputStream());
-                                Scanner scan =  new Scanner(in);
-
-                                Log.i("CONNECTION_RESULTS",scan.toString());
-                                in.close();
+                                APIClass.delete(numApp);
                             }catch(Exception e){
                                 e.printStackTrace();
                             }

@@ -79,7 +79,7 @@ public class EditActivity extends AppCompatActivity {
                     public void run() {
                         HttpURLConnection connection = null;
                         try{
-                            URL url = new URL("http://192.168.1.101:8080/appartement/edit/"+numApp);
+                            URL url = new URL(getString(R.strings.API_URL)+"/appartement/"+numApp);
                             connection = (HttpURLConnection) url.openConnection();
                             connection.setRequestMethod("PUT");
 

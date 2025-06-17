@@ -67,18 +67,9 @@ public class AddFormActivity extends AppCompatActivity {
                     public void run() {
                         HttpURLConnection connection = null;
                         try{
-                            URL url = new URL("http://192.168.1.101:8080/appartement/add");
-                            connection = (HttpURLConnection) url.openConnection();
-                            connection.setRequestMethod("POST");
-
-                            OutputStream out = new BufferedOutputStream(connection.getOutputStream());
-                            out.write(new Genson().serialize(nouvelAppart).getBytes());
-
-                            InputStream in = new BufferedInputStream(connection.getInputStream());
-                            Scanner scan =  new Scanner(in);
-
-                            Log.i("CONNECTION_RESULTS",scan.toString());
-                            in.close();
+                            APIClass.create(nouvelAppart);
+                            Intent it = new Intent(AddFormActivity.this,ListActivity.class);
+                            startActivity(it);
                         }catch(Exception e){
                             e.printStackTrace();
                         }
